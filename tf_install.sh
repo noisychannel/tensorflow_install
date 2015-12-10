@@ -54,8 +54,6 @@ function fix_tf() {
     sed -i 's:/usr/local/include:'$GCC_INCLUDE':g' $file
   done
 
-  ln -s $NUMPY_HEADERS util/python/
-
   sed -i 's:return \[\]  # No extension link opts:return \["-lrt"\]:g' tensorflow/tensorflow.bzl
 }
 
