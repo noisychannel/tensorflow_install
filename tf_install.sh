@@ -21,7 +21,6 @@ NVIDIA_HEADERS=/opt/NVIDIA/cuda-7.0/include
 
 # Python user-site
 PY_USER_SITE=/home/gkumar/.local/lib/python2.7/site-packages
-#TODO(gkumar): Ensure that numpy is >=0.9
 
 export JNI_LD_ARGS="-L$GCC_LIB64 -Wl,-rpath,$GCC_LIB64 -B$GCC_BIN"
 
