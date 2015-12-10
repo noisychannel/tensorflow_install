@@ -17,12 +17,14 @@ This script works with
 
 ## Installation
 For the CLSP cluster, more variables may need to be changed for other clusters
-1. Change `PY_USER_SITE` in tf_install.sh to point to your python user-site
-2. Make CUDA visible to LD_LIBRARY_PATH : `LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda`
+
+1. Change ``PY_USER_SITE`` in tf_install.sh to point to your python user-site
+2. Make CUDA visible to ``LD_LIBRARY_PATH`` : ``LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda``
 3. Run tf_install.sh
-4. Add bazel to $PATH : export PATH=$PATH:`pwd`/bazel/output
+4. Add bazel to ``$PATH`` : ``export PATH=$PATH:`pwd`/bazel/output``
 5. Try the examples on https://www.tensorflow.org/versions/master/get_started/os_setup.html to make
     sure that everything is set up correctly.
-Builds with GPU support by default
+6. (Optional) Builds with GPU support by default. This can be disabled in the script.
+    Check the last few lines in the file.
 
 Optimized for the CLSP@JHU cluster.
