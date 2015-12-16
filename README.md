@@ -1,6 +1,8 @@
 # Wheel install on the CLSP machines
 ``pip install --upgrade pip --user``
+
 ``pip install --upgrade numpy --user``
+
 ``pip install --user /export/a04/gkumar/tmp/tf/tensorflow/tensorflow_pkg/tensorflow-0.6.0-py2-none-any.whl``
 
 # Install Tensorflow from source
