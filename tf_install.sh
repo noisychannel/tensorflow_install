@@ -121,9 +121,9 @@ cd tensorflow
 fix_tf
 ./configure
 # With GPU support
-bazel build -c opt --config=cuda //tensorflow/tools/pip_package:build_pip_package --verbose_failures
+#bazel build -c opt --config=cuda //tensorflow/tools/pip_package:build_pip_package --verbose_failures
 # Without GPU support
-#bazel build -c opt //tensorflow/tools/pip_package:build_pip_package --verbose_failures
+bazel build -c opt //tensorflow/tools/pip_package:build_pip_package --verbose_failures
 bazel-bin/tensorflow/tools/pip_package/build_pip_package `pwd`/tensorflow_pkg
 # Remove existing tensorflow pip package if it exists
 if [ -d $PY_USER_SITE/tensorflow ]; then
