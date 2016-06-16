@@ -5,7 +5,7 @@
 
 For the CPU version
 
-``pip install --user /export/a16/gkumar/code/tensorflow/tensorflow_install/pip_packages/tf_cpu_pkg/tensorflow-0.9.0-py2-none-any.whl``
+``pip install --user /export/a16/gkumar/code/tensorflow/pip_packages/tf_cpu_pkg/tensorflow-0.9.0-py2-none-any.whl``
 
 For the GPU version
 
