@@ -4,11 +4,14 @@
 ``pip install --upgrade numpy --user``
 
 For the CPU version
+
 ``pip install --user /export/a16/gkumar/code/tensorflow/tensorflow_install/pip_packages/tf_cpu_pkg/tensorflow-0.9.0-py2-none-any.whl``
 
 For the GPU version
-``~~pip install --user /export/a16/gkumar/code/tensorflow/tensorflow_install/pip_packages/tf_gpu_pkg/tensorflow-0.9.0-py2-none-any.whl~~``
-The GPU version does not work on the CLSP cluster. Issue here :https://github.com/tensorflow/tensorflow/issues/526
+
+<del>pip install --user /export/a16/gkumar/code/tensorflow/tensorflow_install/pip_packages/tf_gpu_pkg/tensorflow-0.9.0-py2-none-any.whl</del>
+
+The GPU version does not work on the CLSP cluster : https://github.com/tensorflow/tensorflow/issues/526 : Suggestions for workaround welcome.
 
 # Install Tensorflow from source
 
