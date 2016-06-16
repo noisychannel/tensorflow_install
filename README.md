@@ -3,7 +3,12 @@
 
 ``pip install --upgrade numpy --user``
 
-``pip install --user /export/a04/gkumar/tmp/tf/tensorflow/tensorflow_pkg/tensorflow-0.6.0-py2-none-any.whl``
+For the CPU version
+``pip install --user /export/a16/gkumar/code/tensorflow/tensorflow_install/pip_packages/tf_cpu_pkg/tensorflow-0.9.0-py2-none-any.whl``
+
+For the GPU version
+``~~pip install --user /export/a16/gkumar/code/tensorflow/tensorflow_install/pip_packages/tf_gpu_pkg/tensorflow-0.9.0-py2-none-any.whl~~``
+The GPU version does not work on the CLSP cluster. Issue here :https://github.com/tensorflow/tensorflow/issues/526
 
 # Install Tensorflow from source
 
@@ -19,8 +24,8 @@ when the system GCC is outdated and cannot be updated easily.
 
 ## Status
 This script works with
-* Tensorflow commit : 8242b4dd1b36440e191fef8a07b6f37d8bcee60d
-* Bazel commit : 261f5bb3ad0fded4a0ee0dfb389baab1d9c037df
+* Tensorflow commit : 19bda20635c91060996fe44fe201875b3b9ae7a2
+* Bazel commit : 0e17046797f6cfed21755f2eed7c52c0a340d40c
 
 ## Installation
 For the CLSP cluster, more variables may need to be changed for other clusters
@@ -31,7 +36,7 @@ For the CLSP cluster, more variables may need to be changed for other clusters
 4. Add bazel to ``$PATH`` : ``export PATH=$PATH:`pwd`/bazel/output``
 5. Try the examples on https://www.tensorflow.org/versions/master/get_started/os_setup.html to make
     sure that everything is set up correctly.
-6. (Optional) Builds with GPU support by default. This can be disabled in the script.
+6. (Optional) Builds with both CPU and GPU support by default. This can be disabled in the script.
     Check the last few lines in the file.
 
 ## Instructions for the CLSP cluster

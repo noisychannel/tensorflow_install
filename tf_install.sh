@@ -22,32 +22,13 @@ NVIDIA_HEADERS=/opt/NVIDIA/cuda-7.0/include
 # Python user-site
 PY_USER_SITE=/home/gkumar/.local/lib/python2.7/site-packages
 
-export JNI_LD_ARGS="-L$GCC_LIB64 -Wl,-rpath,$GCC_LIB64 -B$GCC_BIN"
-
-function fix_bazel() {
-  # Bug : https://github.com/bazelbuild/bazel/issues/591
-  # Tensorflow requires > GCC 4.8 and CLSP has 4.7
-  # Bazel refuses to build with anything other than /usr/bin/gcc
-  # Inspired by @sethbruder
-  for file in tools/cpp/CROSSTOOL src/test/java/com/google/devtools/build/lib/MOCK_CROSSTOOL; do
-    for e in $( ls $GCC_BIN ); do
-      sed -i 's:/usr/bin/'$e':'$GCC_BIN'/'$e':g' $file
-    done
-
-    # For the linker_flag
-    sed -i 's:linker_flag\: "-B/usr/bin/":linker_flag\: "-B'$GCC_BIN'/"\n  linker_flag\: "-L'$GCC_LIB64'"\n  linker_flag\: "-Wl,-rpath,'$GCC_LIB64'":g' $file
-    # cxx_builtin_include_directory
-    sed -i 's:/usr/lib/gcc/:'$GCC_LIB'/:g' $file
-    sed -i 's:/usr/local/include:'$GCC_INCLUDE':g' $file
-  done
-}
-
 function fix_tf() {
   # Cross-tool requires updates similar to the Bazel crosstool
   # Fix a few other hardcoded details
   sed -i 's:/usr/bin/gcc:'$GCC_BIN'/gcc:g' third_party/gpus/crosstool/clang/bin/crosstool_wrapper_driver_is_not_gcc
 
   for file in third_party/gpus/crosstool/CROSSTOOL; do
+    cp $file ${file}.bak
     for e in $( ls $GCC_BIN ); do
       sed -i 's:/usr/bin/'$e':'$GCC_BIN'/'$e':g' $file
     done
@@ -66,19 +47,12 @@ function fix_tf() {
   sed -i 's:name = "gpu_kernels",:name = "gpu_kernels",\n    hdrs = glob(\["framework/\*\.h","util/\*\.h"\]),:g' tensorflow/core/BUILD
 }
 
-if [ $(javac -version 2>&1 | awk -F'.' '{print $2}') -ne 8 ];
-then
-  echo >&2 "Upgrade JDK to 1.8 and try again. Don't forget to set JAVA_HOME";
-  exit 1;
-fi
-
 # Install Bazel
 command -v bazel >/dev/null 2>&1
 if [[ $? -ne 0 ]]; then
   echo "*** Bazel is not installed. Installing from scratch."
   git clone https://github.com/bazelbuild/bazel.git
   cd bazel
-  fix_bazel
   echo 'build --verbose_failures' > bazelrc
   export BAZELRC=`pwd`/bazelrc
   ./compile.sh
@@ -117,17 +91,19 @@ else
   echo "*** Did not find CUDA. Installing tensorflow without GPU support"
 fi
 
-cd tensorflow
-fix_tf
+#cd tensorflow
+# CPU
 ./configure
-# With GPU support
-#bazel build -c opt --config=cuda //tensorflow/tools/pip_package:build_pip_package --verbose_failures
-# Without GPU support
 bazel build -c opt //tensorflow/tools/pip_package:build_pip_package --verbose_failures
-bazel-bin/tensorflow/tools/pip_package/build_pip_package `pwd`/tensorflow_pkg
-# Remove existing tensorflow pip package if it exists
-if [ -d $PY_USER_SITE/tensorflow ]; then
-  rm -rf $PY_USER_SITE/tensorflow*
-fi
-pip install --user tensorflow_pkg/tensorflow-0.6.0-py2-none-any.whl
+mkdir pip_packages
+bazel-bin/tensorflow/tools/pip_package/build_pip_package `pwd`/pip_packages/tf_cpu_pkg
+# GPU
+bazel clean
+fix_tf
+# With GPU support
+bazel build -c opt --config=cuda //tensorflow/tools/pip_package:build_pip_package --verbose_failures
+bazel-bin/tensorflow/tools/pip_package/build_pip_package `pwd`/pip_packages/tf_gpu_pkg
 cd ..
+echo "--- To remove existing TF installation, remove $PY_USER_SITE/tensorflow"
+echo "--- CPU and GPU packages are inside `pwd`/pip_packages"
+echo "--- To install both, use virtualenv"
