@@ -51,4 +51,20 @@ It is very important that you follow these steps if you plan on using a GPU. If 
 3. ssh to the machine on which the session was scheduled. Run ``nvidia-smi`` to verify that your job is running.
 4. Delete the qlogin session when you are done.
 
+#### *Try your first TensorFlow program (GPU)*
+```python
+$ CUDA_VISBILE_DEVICES=3 python #3 is the id of the free GPU. Use : /home/gkumar/scripts/free-gpu
+
+>>> import tensorflow as tf
+>>> hello = tf.constant('Hello, TensorFlow!')
+>>> sess = tf.Session()
+>>> sess.run(hello)
+Hello, TensorFlow!
+>>> a = tf.constant(10)
+>>> b = tf.constant(32)
+>>> sess.run(a+b)
+42
+>>>
+```
+
 Optimized for the CLSP@JHU cluster.
