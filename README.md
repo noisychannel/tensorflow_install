@@ -9,7 +9,7 @@ For the CPU version
 
 For the GPU version
 
-``pip install --user /export/a16/gkumar/code/tensorflow/tensorflow_install/pip_packages/tf_gpu_pkg/tensorflow-0.9.0-py2-none-any.whl``
+``pip install --user /export/a16/gkumar/code/tensorflow/pip_packages/tf_gpu_pkg/tensorflow-0.9.0-py2-none-any.whl``
 
 The GPU version requires the GPUs to be set in DEFAULT or EXCLUSIVE_PROCESS mode (all GPUs on the CLSP cluster, now operate on the EXCLUSIVE_PROCESS mode).
 
