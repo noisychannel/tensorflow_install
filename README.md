@@ -53,7 +53,7 @@ It is very important that you follow these steps if you plan on using a GPU. If 
 
 #### *Try your first TensorFlow program (GPU)*
 ```python
-$ CUDA_VISBILE_DEVICES=3 python #3 is the id of the free GPU. Use : /home/gkumar/scripts/free-gpu
+$ CUDA_VISIBLE_DEVICES=3 python #3 is the id of the free GPU. Use : /home/gkumar/scripts/free-gpu
 
 >>> import tensorflow as tf
 >>> hello = tf.constant('Hello, TensorFlow!')
