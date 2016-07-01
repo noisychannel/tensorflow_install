@@ -34,7 +34,7 @@ This script works with
 For the CLSP cluster, more variables may need to be changed for other clusters
 
 1. Change ``PY_USER_SITE`` in tf_install.sh to point to your python user-site
-2. Make CUDA visible to ``LD_LIBRARY_PATH`` : ``export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda``
+2. Make CUDA visible to ``LD_LIBRARY_PATH`` : ``export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64``
 3. Run tf_install.sh
 4. Add bazel to ``$PATH`` : ``export PATH=$PATH:`pwd`/bazel/output``
 5. Try the examples on https://www.tensorflow.org/versions/master/get_started/os_setup.html to make
