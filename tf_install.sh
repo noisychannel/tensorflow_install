@@ -3,6 +3,7 @@
 # Built for the CLSP@JHU cluster.
 # Installs Tensorflow and Bazel from source
 # Author : Gaurav Kumar
+# Uses code and ideas from https://github.com/bazelbuild/bazel/issues/649 and @sethbruder
 
 set -e
 
