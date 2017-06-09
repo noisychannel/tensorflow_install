@@ -1,3 +1,13 @@
+# This repository is now deprecated
+The Tensorflow install process is now stable enough that the use of the script is no longer required.
+
+To install on your own machine (CPU support), follow these instructions (check OS specific instructions):
+https://www.tensorflow.org/get_started/os_setup
+
+To install on the CLSP machines follow these instructions: 
+http://www.statmt.org/jhu/?n=NeuralMT.HomePage
+
+
 # Wheel install on the CLSP machines
 ``pip install --upgrade pip --user``
 
